@@ -1,38 +1,118 @@
-
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getMacAddress } from '@/hooks/Mac';
+import { openDB } from 'idb';
 
 const HomePage = () => {
-  const [apiKey, setApiKey] = useState('');
-  const [ipAddress, setIpAddress] = useState('');
+  const [documentsPath, setDocumentsPath] = useState('');
+  const [macAddress, setMacAddress] = useState<string | null>(null);
+  const [key, setKey] = useState<string>('');
+  const navigate = useNavigate();
 
-  // Function to fetch IP address
-  const fetchIpAddress = async () => {
+  // Initialize IndexedDB
+  const setupDB = async () => {
+    const db = await openDB('activationDB', 1, {
+      upgrade(db) {
+        if (!db.objectStoreNames.contains('settings')) {
+          db.createObjectStore('settings', { keyPath: 'key' });
+        }
+      },
+    });
+    return db;
+  };
+
+  // Check if user is already activated using IndexedDB
+  useEffect(() => {
+    const checkActivation = async () => {
+      const db = await setupDB();
+      const activationStatus = await db.get('settings', 'isActivated');
+      if (activationStatus?.value === 'true') {
+        navigate('/dashboard'); // Redirect to dashboard if activated
+      }
+    };
+
+    checkActivation().catch((error) => {
+      console.error('Error checking activation status:', error);
+    });
+  }, [navigate]);
+
+  const handleKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKey(e.target.value);
+  };
+
+  // Fetch MAC Address
+  useEffect(() => {
+    const fetchMacAddress = async () => {
+      const mac = await getMacAddress();
+      setMacAddress(mac);
+    };
+
+    fetchMacAddress().catch((error) => {
+      console.error('Error fetching MAC address:', error);
+    });
+  }, []);
+
+  // Fetch Documents Path
+  useEffect(() => {
+    const fetchDocumentsPath = async () => {
+      if (typeof window !== 'undefined' && (window as any).api) {
+        const path = await (window as any).api.getDocumentsPath();
+        setDocumentsPath(path);
+
+        const fs = (window as any).api.fs;
+        console.log('Documents path:', path);
+
+        // Ensure the documents path exists
+        if (!fs.existsSync(path)) {
+          fs.mkdirSync(path, { recursive: true });
+          console.log('Documents path created:', path);
+        }
+
+        const jsonPath = `${path}/.json`; // Adjusted folder name
+        if (!fs.existsSync(jsonPath)) {
+          fs.mkdirSync(jsonPath, { recursive: true });
+          console.log('JSON path created:', jsonPath);
+        }
+      } else {
+        console.error('window.api not available');
+      }
+    };
+
+    fetchDocumentsPath().catch((error) => {
+      console.error('Error fetching documents path:', error);
+    });
+  }, []);
+
+  // Handle Activation Key Submission
+  const activateKey = async () => {
+    console.log('Activating key:', key);
     try {
-      const response = await fetch('https://api.ipify.org?format=json');
-      const data = await response.json();
-      return data.ip;
+      if (typeof window !== 'undefined' && (window as any).api) {
+        console.log('Activating key with MAC address:', macAddress);
+        const data = await (window as any).api.activation(key, macAddress);
+        if (data) {
+          console.log('Activation response:', data);
+          if (data.message === 'Device registered successfully') {
+            alert('Activation successful');
+            
+            // Store activation status in IndexedDB
+            const db = await setupDB();
+            await db.put('settings', { key: 'isActivated', value: 'true' });
+
+            navigate('/dashboard'); // Redirect to dashboard
+          } else {
+            alert('Activation failed: ' + data.message);
+          }
+        } else {
+          alert('Activation failed');
+        }
+      } else {
+        console.error('window.api not available for activation');
+      }
     } catch (error) {
-      console.error('Error fetching IP address:', error);
-      return 'Unavailable';
+      console.error('Error activating key:', error);
     }
   };
-
-  // Function to generate a unique API key based on IP address
-  const generateApiKeyFromIp = (ip) => {
-    // Create a hash-like API key based on IP
-    return `api_${btoa(ip).replace(/=/g, '').substring(0, 16)}`;
-  };
-
-  // On component mount, fetch IP and generate the key
-  useEffect(() => {
-    const initializeApiKey = async () => {
-      const userIp = await fetchIpAddress();
-      setIpAddress(userIp);
-      const key = generateApiKeyFromIp(userIp);
-      setApiKey(key);
-    };
-    initializeApiKey();
-  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-sans">
@@ -43,20 +123,20 @@ const HomePage = () => {
       <div className="flex items-center space-x-4">
         <input
           type="text"
-          value={apiKey}
-          readOnly
-          placeholder="API Key will appear here"
+          placeholder="Enter Activation Key"
+          value={key}
+          onChange={handleKeyChange}
           className="w-96 p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
-          onClick={() => alert('API key already generated for this IP address!')}
+          onClick={activateKey}
           className="py-3 px-6 text-lg font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           Activate
         </button>
       </div>
-      {ipAddress && (
-        <p className="mt-4 text-sm text-gray-500">Your IP Address: {ipAddress}</p>
+      {macAddress && (
+        <p className="mt-4 text-sm text-gray-500">Your MAC Address: {macAddress}</p>
       )}
     </div>
   );

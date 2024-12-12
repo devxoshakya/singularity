@@ -16,7 +16,6 @@ import {
 import ResultExtraction from "@/pages/ResultExtraction"
 
 export function Dashboard() {
-  const [check, setCheck] = useState(false)
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -47,6 +46,3 @@ export function Dashboard() {
   )
 }
 
-function useState(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.")
-}

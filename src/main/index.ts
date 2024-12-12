@@ -5,14 +5,36 @@ import icon from '../../resources/icon.png?asset'
 import path from 'path';
 import fs  from 'fs';
 import { exec } from 'child_process';
-import { solver } from './Solver';
-
+import { solver } from './src/Solver';
+import { writeToFile } from './src/Helper';
+import { processRollNumbers } from './src/Helper';
 
 // Handle the request to get the "Documents/Singularity" folder path
 ipcMain.handle('get-documents-path', () => {
   const documentsPath = app.getPath('documents'); // Get the Documents folder path
   return path.join(documentsPath, 'Singularity'); // Return the combined path
 });
+
+ipcMain.handle('write-to-file', (_event, input: string) => {
+  try {
+    writeToFile(input);
+    return true;
+  } catch (error) {
+    console.error('Error writing to file:', error);
+    return false;
+  }
+});
+
+ipcMain.handle('get-records', async (_event,) => {
+  try {
+    await processRollNumbers();
+    return 'Records processed successfully';
+  } catch (error) {
+    console.error('Error processing records:', error);
+    return 'Error processing records';
+  }
+});
+
 
 // Handle request to get list of files in a directory
 ipcMain.handle('get-files', async (_event, dirPath: string) => {
@@ -25,6 +47,29 @@ ipcMain.handle('get-files', async (_event, dirPath: string) => {
   }
 });
 
+ipcMain.handle('activation', async (_event, key: string, macAddress: string) => {
+  if (!key || !macAddress) {
+    console.error('Missing key or macAddress');
+    return false; // Invalid input
+  }
+
+  try {
+    const response = await fetch('https://singularity.devxoshakya.xyz/api/register', {
+      method: 'POST',
+      headers: {
+        key:key, // Ensure the `key` is passed as string
+        macaddress: macAddress, // Ensure the `macAddress` is passed as string
+      },
+      body: JSON.stringify({ key, macAddress }),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error during activation fetch:', error);
+    return null; // Return null for unexpected errors
+  }
+});
 // Handle request to open a file
 ipcMain.handle('open-file', async (_event, filePath: string) => {
   try {

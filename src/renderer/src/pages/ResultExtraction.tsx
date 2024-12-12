@@ -1,27 +1,63 @@
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const ResultExtraction = () => {
   const [rollNumbers, setRollNumbers] = useState('');
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const handleExtract = () => {
+  const handleExtract = async () => {
     setLoading(true);
     setProgress(0);
+    
+    // Format roll numbers: only keep digits and filter out invalid ones
+    const rollNoArray = rollNumbers
+    .split('\n')
+    .map((rollNo) => rollNo.trim())
+    .filter((rollNo) => /^[0-9]{13}$/.test(rollNo)); // 13 digits only
+    
+    // Write formatted roll numbers to a file
+    try {
+      // Use the provided API to write data to the file
+      await (window as any).api.writeToFile(rollNoArray.join('\n'));
+      alert('Result Extraction started');
+      await (window as any).api.getRecords();
 
-    // Simulate progress for result extraction
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setLoading(false);
-          alert('Results extracted successfully!');
-          return 100;
+      // Alert that extraction has started
+
+      // Get the initial count of roll numbers
+      const initialCount = rollNoArray.length;
+
+      // Simulate reading and processing roll numbers
+      const interval = setInterval(async () => {
+        try {
+          const path = await (window as any).api.getDocumentsPath();
+          console.log('Documents path:', path);
+          const fs = (window as any).api.fs;
+          const fileContent = await fs.readFile(`${path}/.json/roll.txt`);
+          const content = fileContent?.toString() || '' // Adjust file path accordingly
+          const remainingRollNumbers = content.split('\n').length - 1;
+
+          const currentCount = initialCount - remainingRollNumbers;
+
+          // Update progress
+          const progressPercentage = (currentCount / initialCount) * 100;
+          setProgress(progressPercentage);
+
+          // If all roll numbers are processed, stop the interval
+          if (remainingRollNumbers === 0) {
+            clearInterval(interval);
+            setLoading(false);
+            alert('Result Extraction Success');
+          }
+        } catch (error) {
+          console.error('Error reading file:', error);
         }
-        return prev + 10;
-      });
-    }, 300);
+      }, 300); // Check every 300ms
+
+    } catch (error) {
+      setLoading(false);
+      console.error('Error writing to file:', error);
+    }
   };
 
   return (
@@ -30,15 +66,15 @@ const ResultExtraction = () => {
       <div className="w-full max-w-md">
         <textarea
           rows={5}
-          placeholder="Enter roll numbers ( one per line)"
+          placeholder="Enter roll numbers (one per line)"
           value={rollNumbers}
           onChange={(e) => setRollNumbers(e.target.value)}
           className="w-full p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
-          className={`mt-4 w-full py-2 px-4 text-lg font-semibold text-white rounded-lg ${loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-gray-800 hover:bg-gray-800'}`}
-          onClick={handleExtract}
+          onClick={handleExtract}  // Trigger the extraction and writing to file
           disabled={loading}
+          className={`mt-4 w-full py-2 px-4 text-lg font-semibold text-white rounded-lg ${loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-gray-800 hover:bg-gray-800'}`}
         >
           Extract
         </button>

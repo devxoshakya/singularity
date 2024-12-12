@@ -21,3 +21,10 @@ export function writeFile(fileName: string, content: string): void {
     .then(() => console.log('File written successfully'))
     .catch((error: Error) => console.error('Error writing file:', error));
 }
+
+export function readFile(fileName: string): void {
+  const fs = (window as any).api.fs;
+  fs.readFile(fileName, 'utf8')
+    .then((data: string) => console.log('File content:', data))
+    .catch((error: Error) => console.error('Error reading file:', error));
+}
