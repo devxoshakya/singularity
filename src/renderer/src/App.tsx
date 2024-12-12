@@ -7,6 +7,8 @@ import MAC from './hooks/MacComp'
 import { Dashboard } from './pages/dashboard'
 import ResultExtraction from './pages/ResultExtraction'
 import { Records } from './pages/Records'
+import Home from './pages/Home'
+
 function App(): JSX.Element {
   // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   const [counter, setCounter] = useState(0)
@@ -53,7 +55,7 @@ function App(): JSX.Element {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Records />} />
+        <Route path="/" element={<Home />} />
         <Route path="/hello" element={<Hello />} />
       </Routes>
     </Router>
