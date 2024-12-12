@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 import { Search } from "lucide-react"
 
+=======
+>>>>>>> 70895407abfbc1ab4160418203bee91cb89f25c3
 import { Label } from "@/components/ui/label"
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarInput,
+<<<<<<< HEAD
 } from "../components/ui/sidebar"
+=======
+} from "@/components/ui/sidebar"
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
+>>>>>>> 70895407abfbc1ab4160418203bee91cb89f25c3
 
 export function SearchForm({ ...props }: React.ComponentProps<"form">) {
   return (
@@ -20,7 +28,11 @@ export function SearchForm({ ...props }: React.ComponentProps<"form">) {
             placeholder="Search the docs..."
             className="pl-8"
           />
+<<<<<<< HEAD
           <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+=======
+          <MagnifyingGlassIcon className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
+>>>>>>> 70895407abfbc1ab4160418203bee91cb89f25c3
         </SidebarGroupContent>
       </SidebarGroup>
     </form>

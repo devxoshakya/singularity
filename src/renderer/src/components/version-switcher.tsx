@@ -1,7 +1,11 @@
 "use client"
 
 import * as React from "react"
+<<<<<<< HEAD
 import { Check, ChevronsUpDown, GalleryVerticalEnd } from "lucide-react"
+=======
+import { GalleryVerticalEnd } from "lucide-react"
+>>>>>>> 70895407abfbc1ab4160418203bee91cb89f25c3
 
 import {
   DropdownMenu,
@@ -14,6 +18,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+<<<<<<< HEAD
+=======
+import { CheckIcon, CaretSortIcon } from "@radix-ui/react-icons"
+>>>>>>> 70895407abfbc1ab4160418203bee91cb89f25c3
 
 export function VersionSwitcher({
   versions,
@@ -40,7 +48,11 @@ export function VersionSwitcher({
                 <span className="font-semibold">Documentation</span>
                 <span className="">v{selectedVersion}</span>
               </div>
+<<<<<<< HEAD
               <ChevronsUpDown className="ml-auto" />
+=======
+              <CaretSortIcon className="ml-auto" />
+>>>>>>> 70895407abfbc1ab4160418203bee91cb89f25c3
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -53,7 +65,11 @@ export function VersionSwitcher({
                 onSelect={() => setSelectedVersion(version)}
               >
                 v{version}{" "}
+<<<<<<< HEAD
                 {version === selectedVersion && <Check className="ml-auto" />}
+=======
+                {version === selectedVersion && <CheckIcon className="ml-auto" />}
+>>>>>>> 70895407abfbc1ab4160418203bee91cb89f25c3
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
