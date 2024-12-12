@@ -1,7 +1,63 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain} from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import path from 'path';
+import fs  from 'fs';
+import { exec } from 'child_process';
+import { solver } from './Solver';
+
+
+// Handle the request to get the "Documents/Singularity" folder path
+ipcMain.handle('get-documents-path', () => {
+  const documentsPath = app.getPath('documents'); // Get the Documents folder path
+  return path.join(documentsPath, 'Singularity'); // Return the combined path
+});
+
+// Handle request to get list of files in a directory
+ipcMain.handle('get-files', async (_event, dirPath: string) => {
+  try {
+    const files = fs.readdirSync(dirPath);
+    return files;
+  } catch (error) {
+    console.error('Error reading directory:', error);
+    return [];
+  }
+});
+
+// Handle request to open a file
+ipcMain.handle('open-file', async (_event, filePath: string) => {
+  try {
+    let openCommand = '';
+
+    // Detect platform and set the appropriate command
+    if (process.platform === 'darwin') {
+      openCommand = `open "${filePath}"`; // macOS command to open file
+    } else if (process.platform === 'win32') {
+      openCommand = `start "" "${filePath}"`; // Windows command to open file
+    } else if (process.platform === 'linux') {
+      openCommand = `xdg-open "${filePath}"`; // Linux command to open file
+    }
+    
+
+
+
+    // Execute the open command
+    exec(openCommand, (error, stdout) => {
+      if (error) {
+        console.error(`Error opening file: ${error}`);
+      } else {
+        console.log(`File opened: ${stdout}`);
+      }
+    });
+
+    return 'File opened successfully';
+  } catch (error) {
+    console.error('Error opening file:', error);
+    return 'Error opening file';
+  }
+});
+
 
 function createWindow(): void {
   // Create the browser window.
@@ -13,7 +69,9 @@ function createWindow(): void {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      nodeIntegration: true,
+      contextIsolation: false,
     }
   })
 
@@ -39,6 +97,20 @@ function createWindow(): void {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+
+
+  ipcMain.handle("fetch-student-data", async (event, rollNo: number) => {
+    try {
+      const data = await solver(rollNo);
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
+  });
+
+
+
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 

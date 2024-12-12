@@ -5,4 +5,8 @@ declare global {
     electron: ElectronAPI
     api: unknown
   }
+  interface ElectronAPI {
+    fetchStudentData: (rollNo: number) => Promise<any>;
+  }
+
 }

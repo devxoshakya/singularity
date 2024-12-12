@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+import MAC from './hooks/MacComp'
 function App(): JSX.Element {
   // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   const [counter, setCounter] = useState(0)
@@ -20,6 +21,7 @@ function App(): JSX.Element {
   }
 
   function Main(): JSX.Element {
+    
     return(
       <div className="flex flex-row items-center my-auto justify-center h-screen p-16">
       <Card className="w-[350px] my-auto">
@@ -48,7 +50,7 @@ function App(): JSX.Element {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<MAC />} />
         <Route path="/hello" element={<Hello />} />
       </Routes>
     </Router>
