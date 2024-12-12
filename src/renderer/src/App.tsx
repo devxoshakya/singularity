@@ -4,6 +4,9 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
 import MAC from './hooks/MacComp'
+import { Dashboard } from './pages/dashboard'
+import ResultExtraction from './pages/ResultExtraction'
+import { Records } from './pages/Records'
 function App(): JSX.Element {
   // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   const [counter, setCounter] = useState(0)
@@ -50,7 +53,7 @@ function App(): JSX.Element {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MAC />} />
+        <Route path="/" element={<Records />} />
         <Route path="/hello" element={<Hello />} />
       </Routes>
     </Router>
