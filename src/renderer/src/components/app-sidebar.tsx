@@ -48,7 +48,7 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>,setter : any) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
