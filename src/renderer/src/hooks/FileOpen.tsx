@@ -7,7 +7,7 @@ const FileExplorer =  () => {
   useEffect(() => {
     const fetchFiles = async () => {
       // Replace this with the actual directory you want to fetch
-      const directoryPath = '/home/devxoshakya/Documents/Singularity'; 
+      const directoryPath = await (window as any).api.getDocumentsPath();
       const fileList = await (window as any).api.getFiles(directoryPath);
       console.log(fileList);
       setFiles(fileList);
@@ -18,7 +18,8 @@ const FileExplorer =  () => {
 
   const openFile = async (fileName: string) => {
     if (fileName) {
-      const filePath = `/home/devxoshakya/Documents/Singularity/${fileName}`; // Construct full file path
+      const directoryPath = await (window as any).api.getDocumentsPath();
+      const filePath = `${directoryPath}/${fileName}`; // Construct full file path
       const result = await (window as any).api.openFile(filePath);
       alert(result); 
     }
