@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { useState } from 'react'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom'
 import MAC from './hooks/MacComp'
 import { Dashboard } from './pages/dashboard'
 import ResultExtraction from './pages/ResultExtraction'
@@ -54,11 +54,12 @@ function App(): JSX.Element {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
+    
   )
 }
 

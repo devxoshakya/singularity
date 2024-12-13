@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getMacAddress } from '@/hooks/Mac';
@@ -7,9 +8,9 @@ const HomePage = () => {
   const [documentsPath, setDocumentsPath] = useState('');
   const [macAddress, setMacAddress] = useState<string | null>(null);
   const [key, setKey] = useState<string>('');
+  const [loading, setLoading] = useState(false); // Added loading state
   const navigate = useNavigate();
 
-  // Initialize IndexedDB
   const setupDB = async () => {
     const db = await openDB('activationDB', 1, {
       upgrade(db) {
@@ -21,13 +22,12 @@ const HomePage = () => {
     return db;
   };
 
-  // Check if user is already activated using IndexedDB
   useEffect(() => {
     const checkActivation = async () => {
       const db = await setupDB();
       const activationStatus = await db.get('settings', 'isActivated');
       if (activationStatus?.value === 'true') {
-        navigate('/dashboard'); // Redirect to dashboard if activated
+        navigate('/dashboard');
       }
     };
 
@@ -40,7 +40,6 @@ const HomePage = () => {
     setKey(e.target.value);
   };
 
-  // Fetch MAC Address
   useEffect(() => {
     const fetchMacAddress = async () => {
       const mac = await getMacAddress();
@@ -52,7 +51,6 @@ const HomePage = () => {
     });
   }, []);
 
-  // Fetch Documents Path
   useEffect(() => {
     const fetchDocumentsPath = async () => {
       if (typeof window !== 'undefined' && (window as any).api) {
@@ -62,13 +60,12 @@ const HomePage = () => {
         const fs = (window as any).api.fs;
         console.log('Documents path:', path);
 
-        // Ensure the documents path exists
         if (!fs.existsSync(path)) {
           fs.mkdirSync(path, { recursive: true });
           console.log('Documents path created:', path);
         }
 
-        const jsonPath = `${path}/.json`; // Adjusted folder name
+        const jsonPath = `${path}/.json`;
         if (!fs.existsSync(jsonPath)) {
           fs.mkdirSync(jsonPath, { recursive: true });
           console.log('JSON path created:', jsonPath);
@@ -83,9 +80,8 @@ const HomePage = () => {
     });
   }, []);
 
-  // Handle Activation Key Submission
   const activateKey = async () => {
-    console.log('Activating key:', key);
+    setLoading(true); // Set loading to true
     try {
       if (typeof window !== 'undefined' && (window as any).api) {
         console.log('Activating key with MAC address:', macAddress);
@@ -94,12 +90,9 @@ const HomePage = () => {
           console.log('Activation response:', data);
           if (data.message === 'Device registered successfully') {
             alert('Activation successful');
-            
-            // Store activation status in IndexedDB
             const db = await setupDB();
             await db.put('settings', { key: 'isActivated', value: 'true' });
-
-            navigate('/dashboard'); // Redirect to dashboard
+            navigate('/dashboard');
           } else {
             alert('Activation failed: ' + data.message);
           }
@@ -111,6 +104,8 @@ const HomePage = () => {
       }
     } catch (error) {
       console.error('Error activating key:', error);
+    } finally {
+      setLoading(false); // Reset loading to false
     }
   };
 
@@ -127,12 +122,18 @@ const HomePage = () => {
           value={key}
           onChange={handleKeyChange}
           className="w-96 p-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={loading} // Disable input while loading
         />
         <button
           onClick={activateKey}
-          className="py-3 px-6 text-lg font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={loading} // Disable button while loading
+          className={`py-3 px-6 text-lg font-semibold text-white rounded-lg ${
+            loading
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500'
+          }`}
         >
-          Activate
+          {loading ? 'Activating...' : 'Activate'}
         </button>
       </div>
       {macAddress && (
