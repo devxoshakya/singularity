@@ -1,5 +1,7 @@
 import * as React from "react"
 import { ChevronRight } from "lucide-react"
+import ResultExtraction from "@/pages/ResultExtraction"
+import { Records } from "@/pages/Records"
 
 import { SearchForm } from "@/components/search-form"
 import { VersionSwitcher } from "@/components/version-switcher"
@@ -21,34 +23,25 @@ import {
   SidebarRail,
 } from "../components/ui/sidebar"
 
-// This is sample data.
+// Sample data
 const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+  versions: ["1.0.1"],
   navMain: [
     {
       title: "Result Extraction",
-      url: "#",
-      
-    },
-    {
-      title: "Summary Generator",
-      url: "#",
-      
+      url: "/result-extraction",
     },
     {
       title: "Records",
-      url: "#",
-      
-    },
-    {
-      title: "Analysis",
-      url: "#",
-      
+      url: "/records",
     },
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>,setter : any) {
+export function AppSidebar({
+  setter,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & { setter: (url: string) => void }) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -59,7 +52,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>,se
         <SearchForm />
       </SidebarHeader>
       <SidebarContent className="gap-0">
-        {/* We create a collapsible SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
           <Collapsible
             key={item.title}
@@ -72,14 +64,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>,se
                 asChild
                 className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               >
-                <CollapsibleTrigger>
+                <CollapsibleTrigger
+                  onClick={() => setter(item.url)} // Pass the URL to the setter function
+                >
                   {item.title}{" "}
                   <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
                 </CollapsibleTrigger>
               </SidebarGroupLabel>
               <CollapsibleContent>
                 <SidebarGroupContent>
-                 
+                  {/* Additional content can go here */}
                 </SidebarGroupContent>
               </CollapsibleContent>
             </SidebarGroup>

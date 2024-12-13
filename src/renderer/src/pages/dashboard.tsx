@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
@@ -14,11 +15,16 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import ResultExtraction from "@/pages/ResultExtraction"
+import { Records } from "./Records"
 
 export function Dashboard() {
+  // State to store the current URL selected from the sidebar
+  const [currentUrl, setCurrentUrl] = useState("/result-extraction")
+
   return (
     <SidebarProvider>
-      <AppSidebar />
+      {/* Pass the setter to AppSidebar */}
+      <AppSidebar setter={setCurrentUrl} />
       <SidebarInset>
         <header className="flex sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -27,22 +33,31 @@ export function Dashboard() {
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="#">
-                  Result Extraction
+                  {currentUrl === "/result-extraction"
+                    ? "Result Extraction"
+                    : "Records"}
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>Summary Generator</BreadcrumbPage>
+                <BreadcrumbPage>
+                  {currentUrl === "/result-extraction"
+                    ? ""
+                    : "Detailed View"}
+                </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          
-          <ResultExtraction />
+          {/* Dynamically render the selected component */}
+          {currentUrl === "/result-extraction" ? (
+            <ResultExtraction />
+          ) : (
+            <Records />
+          )}
         </div>
       </SidebarInset>
     </SidebarProvider>
   )
 }
-
