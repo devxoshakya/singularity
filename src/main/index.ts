@@ -81,7 +81,7 @@ ipcMain.handle('open-file', async (_event, filePath: string) => {
     } else if (process.platform === 'win32') {
       openCommand = `start "" "${filePath}"`; // Windows command to open file
     } else if (process.platform === 'linux') {
-      openCommand = `xdg-open "${filePath}"`; // Linux command to open file
+      openCommand = `open "${filePath}"`; // Linux command to open file
     }
     
 
