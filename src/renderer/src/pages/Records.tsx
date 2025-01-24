@@ -94,7 +94,7 @@ export function Records() {
         <Input
           type="text"
           placeholder="Search files..."
-          className="flex-grow"
+          className="flex-grow dark:bg-gray-800 "
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />

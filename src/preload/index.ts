@@ -24,6 +24,7 @@ type CustomAPI = {
   activation: (key: string, macaddress: string) => Promise<any>;
   writeToFile: (input: string) => Promise<boolean>; 
   getRecords: () => Promise<string>;
+  getRollNumberCount: () => Promise<number>;
 };
 
 
@@ -56,6 +57,10 @@ const api: CustomAPI = {
   },
   getRecords: async () => {
     const result = await ipcRenderer.invoke('get-records');
+    return result;
+  },
+  getRollNumberCount: async () => {
+    const result = await ipcRenderer.invoke('get-roll-number-count');
     return result;
   },
 

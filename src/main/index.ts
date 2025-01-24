@@ -8,11 +8,24 @@ import { exec } from 'child_process';
 import { solver } from './src/Solver';
 import { writeToFile } from './src/Helper';
 import { processRollNumbers } from './src/Helper';
+import { getRollNumberCount } from './src/Helper';
 
 // Handle the request to get the "Documents/Singularity" folder path
 ipcMain.handle('get-documents-path', () => {
   const documentsPath = app.getPath('documents'); // Get the Documents folder path
   return path.join(documentsPath, 'Singularity'); // Return the combined path
+});
+
+ipcMain.handle('get-roll-number-count', async () => {
+  try {
+    const filePath = path.join(app.getPath('documents'), 'Singularity/.json/roll.txt');
+    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+    const remainingRollNumbers = fileContent.split('\n').filter(Boolean).length;
+    return remainingRollNumbers; // Return the dynamic count
+  } catch (error) {
+    console.error('Error reading roll number count:', error);
+    return 0; // Fallback if an error occurs
+  }
 });
 
 ipcMain.handle('write-to-file', (_event, input: string) => {

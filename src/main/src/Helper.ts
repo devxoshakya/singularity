@@ -64,24 +64,53 @@ export async function processRollNumbers(): Promise<void> {
 
             // Remove the processed roll number from roll.txt
             fileContent = fileContent.replace(rollNo + '\n', '');
+            
             fs.writeFileSync(filePath, fileContent, 'utf8');
             console.log(`Removed roll number: ${rollNo} from roll.txt`);
 
             // Optional: Pause for a brief moment before continuing
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            // await new Promise((resolve) => setTimeout(resolve, 500));
         }
 
         console.log('All roll numbers processed.');
+        
+        fs.writeFileSync(filePath, '', 'utf8');
+        console.log('Cleared roll.txt file');
         writeDataToTemplate(jsonFilePath, real + "/template.xlsx", documentsPath +"/Singularity" + `/record${index}.xlsx`, 7, 1).catch(
             (err) => console.error("Error:", err)
           );
-          
+    
     } catch (error) {
         console.error('Error processing roll numbers:', error);
     }
 }
 
+// Function to get the number of roll numbers in the roll.txt file
+export function getRollNumberCount(): number {
+    const documentsPath = app.getPath('documents');
+    const real = path.join(documentsPath, 'Singularity/.json');
+    const filePath = path.join(real, 'roll.txt');
 
+    try {
+        // Check if the roll.txt file exists
+        if (!fs.existsSync(filePath)) {
+            console.log('roll.txt file not found');
+            return 0;
+        }
+
+        // Read the roll numbers from roll.txt file
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const rollNumbers = fileContent.split('\n').map((rollNo) => rollNo.trim()).filter(Boolean);
+
+        // Return the count of roll numbers
+        console.log(`Number of roll numbers in file: ${rollNumbers.length}`);
+        return rollNumbers.length;
+        
+    } catch (error) {
+        console.error('Error reading roll numbers:', error);
+        return 0;
+    }
+}
 
 
 // Function to get the next available JSON file path (record1.json, record2.json, etc.)

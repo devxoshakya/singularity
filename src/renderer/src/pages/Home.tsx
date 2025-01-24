@@ -110,8 +110,8 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-sans">
-      <h1 className="text-5xl font-extrabold mb-4">Singularity</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-sans text-black">
+      <h1 className="text-5xl font-extrabold mb-4 text-black">Singularity</h1>
       <p className="text-lg text-gray-700 mb-8 text-center max-w-2xl">
         The modern Result Extraction tool for effortless results management with ease.
       </p>
