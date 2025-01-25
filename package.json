@@ -1,5 +1,5 @@
 {
-  "name": "electron-app",
+  "name": "singularity",
   "version": "1.0.0",
   "description": "An Electron application with React and TypeScript",
   "main": "./out/main/index.js",
@@ -14,10 +14,10 @@
     "start": "electron-vite preview",
     "dev:nowatch": "electron-vite dev",
     "dev": "electron-vite dev -w",
-    "build": "bun run typecheck && DISABLE_ESLINT=true electron-vite build",
+    "build": "electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "build:unpack": "npm run build && electron-builder --dir",
-    "build:win": "bun run build && DISABLE_ESLINT=true electron-builder --win",
+    "build:win": "bun run build &&  electron-builder --win",
     "build:mac": "electron-vite build && electron-builder --mac",
     "build:linux": "electron-vite build && electron-builder --linux"
   },
