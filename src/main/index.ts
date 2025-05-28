@@ -67,7 +67,7 @@ ipcMain.handle('activation', async (_event, key: string, macAddress: string) => 
   }
 
   try {
-    const response = await fetch('https://singularity.devxoshakya.xyz/api/register', {
+    const response = await fetch('https://singularity.devshakya.xyz/api/register', {
       method: 'POST',
       headers: {
         key:key, // Ensure the `key` is passed as string
