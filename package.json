@@ -1,10 +1,8 @@
 {
   "name": "singularity-monorepo",
- 
   "packageManager": "bun@1.2.14",
   "private": true,
-  
-   "scripts": {
+  "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
@@ -24,5 +22,8 @@
   ],
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.14.1"
   }
 }

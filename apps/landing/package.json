@@ -12,25 +12,24 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
-    "@dotlottie/react-player": "^1.6.19",
     "@lottiefiles/dotlottie-react": "^0.7.2",
     "@opennextjs/cloudflare": "^1.3.0",
-    "framer-motion": "^11.3.2",
+    "framer-motion": "^11.18.2",
     "next": "15.3.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "tailwind-merge": "^2.4.0"
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@types/node": "^20",
+    "@types/node": "^20.19.0",
     "@types/react": "19.1.7",
     "@types/react-dom": "19.1.6",
-    "eslint": "^8",
+    "eslint": "^8.57.1",
     "eslint-config-next": "15.3.3",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5",
+    "postcss": "^8.5.5",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
     "wrangler": "^4.20.0"
   },
   "overrides": {

@@ -62,7 +62,7 @@ export const Testimonials = () => {
 					>
 						{[...testimonials, ...testimonials].map((testimonial, _) => (
 							<div
-								key={testimonial.name}
+								key={Math.random()}
 								className="border border-white/15 p-6 md:p-10 rounded-xl bg-[linear-gradient(to_bottom_left,rgb(140,69,255,.3),black)] max-w-xs md:max-w-md flex-none"
 							>
 								<div className="text-lg md:text-2xl tracking-tight">

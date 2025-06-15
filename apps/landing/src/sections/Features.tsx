@@ -1,6 +1,6 @@
 'use client'
 import ProductImage from '@/assets/product-image.png'
-import { DotLottieCommonPlayer, DotLottiePlayer } from '@dotlottie/react-player'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 import { animate, motion, useMotionTemplate, useMotionValue, ValueAnimationTransition } from 'framer-motion'
 import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react'
 
@@ -33,7 +33,7 @@ const tabs = [
 
 const FeatureTab = (props: (typeof tabs)[number] & ComponentPropsWithoutRef<'div'> & { selected: boolean }) => {
   const tabRef = useRef<HTMLDivElement>(null)
-  const dotLottieRef = useRef<DotLottieCommonPlayer>(null)
+  const dotLottieRef = useRef<any>(null)
   const xPercentage = useMotionValue(0)
   const yPercentage = useMotionValue(0)
   const maskImage = useMotionTemplate`radial-gradient(80px 80px at ${xPercentage}% ${yPercentage}%, black, transparent)`
@@ -61,7 +61,7 @@ const FeatureTab = (props: (typeof tabs)[number] & ComponentPropsWithoutRef<'div
   }, [props.selected])
 
   const handleTabHover = () => {
-    dotLottieRef?.current?.seek(0)
+    dotLottieRef?.current?.setFrame(0)
     dotLottieRef?.current?.play()
   }
 
@@ -81,7 +81,13 @@ const FeatureTab = (props: (typeof tabs)[number] & ComponentPropsWithoutRef<'div
         ></motion.div>
       )}
       <div className="h-12 w-12 border border-white/15 rounded-lg inline-flex items-center justify-center">
-        <DotLottiePlayer ref={dotLottieRef} src={props.icon} className="h-5 w-5" />
+        <DotLottieReact 
+          src={props.icon} 
+          className="h-5 w-5"
+          dotLottieRefCallback={(dotLottie) => {
+            dotLottieRef.current = dotLottie;
+          }}
+        />
       </div>
       <div className="font-medium">{props.title}</div>
       {props.isNew && <div className="text-xs rounded-full px-2 py-0.5 bg-[#8c44ff] text-black font-semibold">new</div>}
