@@ -3,7 +3,7 @@ import StudentModel from '../models/Student';
 import { solver } from '../utils/solver';
 
 const MONGO_URI = process.env.MONGO_URI!;
-const TARGET_YEAR = 2; // 👈 Change this to update for a different year
+const TARGET_YEAR = 1; // 👈 Change this to update for a different year
 
 async function connectDB() {
   await mongoose.connect(MONGO_URI);

@@ -20,7 +20,7 @@ export default function HeroSection() {
         </LinkPreview>
         {""}, this results portal is built by{" "}
         <LinkPreview
-          url="https://github.com/devxoshakya/singularity"
+          url="https://devshakya.xyz"
           className="font-bold"
           imageSrc="/dev.png"
           isStatic
@@ -29,7 +29,7 @@ export default function HeroSection() {
         </LinkPreview>{" "}
         and{" "}
         <LinkPreview
-          url="https://github.com/devxoshakya/singularity"
+          url="https://akshita.xyz"
           className="font-bold"
           imageSrc="/akshita.png"
           isStatic
