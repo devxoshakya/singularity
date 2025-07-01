@@ -1,0 +1,342 @@
+┌──(devxoshakya㉿kali)-[~/git-experiments/singularity-desktop/packages/utilities]
+└─$ bun utils/solver
+{
+  rollNo: "2000680100172",
+  enrollmentNo: "200068010013615",
+  fullName: "MADHUR NARANG",
+  fatherName: "SUNIL NARANG",
+  course: "B.TECH",
+  branch: "COMPUTER SCIENCE AND ENGINEERING",
+  SGPA: {
+    sem1: 7.95,
+    sem2: 8.3,
+    sem3: 7.5,
+    sem4: 8.48,
+    sem5: 7.27,
+    sem6: 6.9,
+    sem7: 8.06,
+    sem8: 8.83,
+  },
+  CarryOvers: [
+    {
+      session: "2021-22(REGULAR)",
+      sem: "3,4",
+      cop: "COP : KCS302",
+    }
+  ],
+  divison: "I-DIV",
+  cgpa: "7.88",
+  instituteName: "MEERUT INSTITUTE OF ENGINEERING & TECHNOLOGY,MEERUT",
+  Subjects: [
+    {
+      subject: "RURAL DEVELOPMENT: ADMINISTRATION AND PLANNING",
+      code: "KHU801",
+      type: "Theory",
+      internal: "42",
+      external: "65",
+    }, {
+      subject: "ENTREPRENEURSHIP DEVELOPMENT",
+      code: "KOE083",
+      type: "Theory",
+      internal: "42",
+      external: "69",
+    }, {
+      subject: "DIGITAL AND SOCIAL MEDIA MARKETING",
+      code: "KOE094",
+      type: "Theory",
+      internal: "43",
+      external: "51",
+    }, {
+      subject: "Project",
+      code: "KCS851",
+      type: "Practical",
+      internal: "95",
+      external: "290",
+    }
+  ],
+  latestResultStatus: "PASS",
+  totalMarksObtained: 697,
+  latestCOP: "COP :",
+}
+                                                                                                                                                     
+┌──(devxoshakya㉿kali)-[~/git-experiments/singularity-desktop/packages/utilities]
+└─$ bun utils/solver
+{
+  rollNo: "2100680100102",
+  enrollmentNo: "210068010021863",
+  fullName: "AYUSH SINGH",
+  fatherName: "KULDEEP SINGH",
+  course: "B.TECH",
+  branch: "COMPUTER SCIENCE AND ENGINEERING",
+  SGPA: {
+    sem1: 7.5,
+    sem2: 7.75,
+    sem3: 7.5,
+    sem4: 6.33,
+    sem5: 6.5,
+    sem6: 7.52,
+    sem7: 8.11,
+  },
+  CarryOvers: [
+    [ "No Backlogs" ]
+  ],
+  divison: "",
+  cgpa: "",
+  instituteName: "MEERUT INSTITUTE OF ENGINEERING & TECHNOLOGY,MEERUT",
+  Subjects: [
+    {
+      subject: "PROJECT MANAGEMENT & ENTREPRENEURSHIP",
+      code: "KHU702",
+      type: "Theory",
+      internal: "42",
+      external: "51",
+    }, {
+      subject: "Artificial Intelligence",
+      code: "KCS071",
+      type: "Theory",
+      internal: "40",
+      external: "68",
+    }, {
+      subject: "Cloud Computing",
+      code: "KCS713",
+      type: "Theory",
+      internal: "44",
+      external: "51",
+    }, {
+      subject: "RENEWABLE ENERGY RESOURCES",
+      code: "KOE074",
+      type: "Theory",
+      internal: "40",
+      external: "58",
+    }, {
+      subject: "Departmental Elective Lab",
+      code: "KCS751A",
+      type: "Practical",
+      internal: "22",
+      external: "22",
+    }, {
+      subject: "Mini Project or Internship Assessment",
+      code: "KCS752",
+      type: "Practical",
+      internal: "45",
+      external: "",
+    }, {
+      subject: "Project I",
+      code: "KCS753",
+      type: "Practical",
+      internal: "140",
+      external: "",
+    }
+  ],
+  latestResultStatus: "",
+  totalMarksObtained: 623,
+  latestCOP: "COP :",
+}
+                                                                                                                                                     
+                                                                                                                                                     
+┌──(devxoshakya㉿kali)-[~/git-experiments/singularity-desktop/packages/utilities]
+└─$ bun utils/solver
+{
+  rollNo: "2200680100012",
+  enrollmentNo: "220068010001981",
+  fullName: "ABHIJEET SINGH CHAUHAN",
+  fatherName: "DHARMENDRA SINGH",
+  course: "B.TECH",
+  branch: "COMPUTER SCIENCE AND ENGINEERING",
+  SGPA: {
+    sem1: 5.82,
+    sem2: 6,
+    sem3: 5.76,
+    sem4: 5.57,
+    sem5: 5.91,
+  },
+  CarryOvers: [
+    {
+      session: "2022-23(REGULAR)",
+      sem: "1,2",
+      cop: "COP : BAS103,BAS203",
+    }, {
+      session: "2023-24(REGULAR)",
+      sem: "3,4",
+      cop: "COP : ,BCC402",
+    }
+  ],
+  divison: "",
+  cgpa: "",
+  instituteName: "MEERUT INSTITUTE OF ENGINEERING & TECHNOLOGY,MEERUT",
+  Subjects: [
+    {
+      subject: "Database Management System",
+      code: "BCS501",
+      type: "Theory",
+      internal: "20",
+      external: "21",
+    }, {
+      subject: "Web Technology",
+      code: "BCS502",
+      type: "Theory",
+      internal: "23",
+      external: "26",
+    }, {
+      subject: "Design and Analysis of Algorithm",
+      code: "BCS503",
+      type: "Theory",
+      internal: "20",
+      external: "37",
+    }, {
+      subject: "Data Analytics",
+      code: "BCS052",
+      type: "Theory",
+      internal: "23",
+      external: "24",
+    }, {
+      subject: "Machine Learning Techniques",
+      code: "BCS055",
+      type: "Theory",
+      internal: "20",
+      external: "25",
+    }, {
+      subject: "Database Management System Lab",
+      code: "BCS551",
+      type: "Practical",
+      internal: "50",
+      external: "43",
+    }, {
+      subject: "Web Technology Lab",
+      code: "BCS552",
+      type: "Practical",
+      internal: "42",
+      external: "44",
+    }, {
+      subject: "Design and Analysis of Algorithm Lab",
+      code: "BCS553",
+      type: "Practical",
+      internal: "42",
+      external: "40",
+    }, {
+      subject: "Mini Project or Internship Assessment",
+      code: "BCS554",
+      type: "Practical",
+      internal: "85",
+      external: "",
+    }, {
+      subject: "Constitution of India",
+      code: "BNC501",
+      type: "CA",
+      internal: "20",
+      external: "33",
+    }
+  ],
+  latestResultStatus: "",
+  totalMarksObtained: 585,
+  latestCOP: "COP :",
+}
+                                                                                                                                                     
+┌──(devxoshakya㉿kali)-[~/git-experiments/singularity-desktop/packages/utilities]
+└─$ bun utils/solver
+{
+  rollNo: "2300680100119",
+  enrollmentNo: "230068010035236",
+  fullName: "GAURAV AGGARWAL",
+  fatherName: "RAKESH AGGARWAL",
+  course: "B.TECH",
+  branch: "COMPUTER SCIENCE AND ENGINEERING",
+  SGPA: {
+    sem1: 9.86,
+    sem2: 9.59,
+  },
+  CarryOvers: [
+    [ "No Backlogs" ]
+  ],
+  divison: "",
+  cgpa: "",
+  instituteName: "MEERUT INSTITUTE OF ENGINEERING & TECHNOLOGY,MEERUT",
+  Subjects: [
+    {
+      subject: "Engineering Chemistry",
+      code: "BAS202",
+      type: "Theory",
+      internal: "30",
+      external: "69",
+    }, {
+      subject: "Engineering Mathematics-II",
+      code: "BAS203",
+      type: "Theory",
+      internal: "30",
+      external: "60",
+    }, {
+      subject: "Fundamentals of Electronics Engineering",
+      code: "BEC201",
+      type: "Theory",
+      internal: "30",
+      external: "58",
+    }, {
+      subject: "Fundamentals of Mechanical Engineering",
+      code: "BME201",
+      type: "Theory",
+      internal: "30",
+      external: "53",
+    }, {
+      subject: "Soft Skills",
+      code: "BAS205",
+      type: "Theory",
+      internal: "30",
+      external: "55",
+    }, {
+      subject: "Engineering Chemistry Lab",
+      code: "BAS252",
+      type: "Practical",
+      internal: "50",
+      external: "50",
+    }, {
+      subject: "Basic Electronics Engineering Lab",
+      code: "BEC251",
+      type: "Practical",
+      internal: "50",
+      external: "50",
+    }, {
+      subject: "English Language Lab",
+      code: "BAS255",
+      type: "Practical",
+      internal: "50",
+      external: "50",
+    }, {
+      subject: "Workshop Practice Lab",
+      code: "BWS251",
+      type: "Practical",
+      internal: "50",
+      external: "50",
+    }, {
+      subject: "Sports and Yoga",
+      code: "BVA251",
+      type: "CA",
+      internal: "90",
+      external: "",
+    }
+  ],
+  latestResultStatus: "PASS",
+  totalMarksObtained: 845,
+  latestCOP: "COP :",
+}
+                                                                                                                                                     
+┌──(devxoshakya㉿kali)-[~/git-experiments/singularity-desktop/packages/utilities]
+└─$ bun utils/solver
+{
+  rollNo: "2400680100119",
+  enrollmentNo: "PROVISIONAL",
+  fullName: "ARYAN BHARDWAJ",
+  fatherName: "NAVNEESH SHARMA",
+  course: "B.Tech",
+  branch: "Computer Science and Engineering",
+  SGPA: {},
+  CarryOvers: [
+    [ "No Backlogs" ]
+  ],
+  divison: "",
+  cgpa: "",
+  instituteName: "MEERUT INSTITUTE OF ENGINEERING & TECHNOLOGY,MEERUT",
+  Subjects: [],
+  latestResultStatus: "N/A",
+  totalMarksObtained: 0,
+  latestCOP: "NO Backlogs",
+}
