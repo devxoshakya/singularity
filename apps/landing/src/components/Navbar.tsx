@@ -9,6 +9,14 @@ import { useState } from "react";
 import { Badge } from "./ui/badge";
 import { CornerDownLeft } from "lucide-react";
 
+const navItems = [
+  { label: "Features", href: "/#features" },
+  { label: "Demo", href: "/#demo" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Testimonials", href: "/#testimonials" },
+  { label: "FAQ", href: "/#faq" },
+];
+
 export const Logo = () => {
   return (
     <div className="flex items-center justify-center gap-2">
@@ -43,7 +51,7 @@ const NavBar = () => {
       <div className=" w-full">
         <div
           className={cn(
-            `flex items-center w-full justify-between px-2 md:px-4 py-3 transition-all duration-300 ${
+            `relative isolate flex items-center w-full justify-between px-2 md:px-4 py-3 transition-all duration-300 ${
               isScrolled &&
               "bg-accent/30 backdrop-blur-lg inset-shadow-sm inset-shadow-white/20 rounded-2xl px-4"
             }`
@@ -52,6 +60,25 @@ const NavBar = () => {
           <Link href="/" className="cursor-pointer">
             <Logo />
           </Link>
+
+          <div className="hidden lg:flex items-center gap-1">
+            {navItems.map((item) => (
+              <Button
+                key={item.href}
+                variant="ghost"
+                size="sm"
+                asChild
+                className="rounded-full bg-white/5 px-3 text-white/75 transition-all duration-200 hover:bg-white/10 hover:text-white"
+              >
+                <Link
+                  href={item.href}
+                  className="text-sm"
+                >
+                  {item.label}
+                </Link>
+              </Button>
+            ))}
+          </div>
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">
