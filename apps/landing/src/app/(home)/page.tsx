@@ -24,30 +24,37 @@ export default async function Home() {
     return (
         <div className="w-full relative overflow-hidden">
             {/* <Header /> */}
-            <HeroSection />
-            <div className="max-w-480 mx-auto px-4">
+            <section id="hero" className="scroll-mt-24">
+                <HeroSection />
+            </section>
+            <section id="logo-ticker" className="max-w-480 mx-auto px-4 scroll-mt-24">
                 <LogoTicker />
-            </div>
-            <div className="max-w-480 mx-auto px-4">
+            </section>
+            <section id="features" className="max-w-480 mx-auto px-4 scroll-mt-24">
                 <Features />
-            </div>
-            <div className="max-w-480 mx-auto px-4">
+            </section>
+            <section id="demo" className="max-w-480 mx-auto px-4 scroll-mt-24">
                 {/* <BentoFeatures /> */}
-            </div>
-            <div className="max-w-480 mx-auto px-4">
                 <FeaturesSectionDemo />
-            </div>
-            <div className="max-w-480 mx-auto px-4">
+            </section>
+            <section id="pricing" className="max-w-480 mx-auto px-4 scroll-mt-24">
                 <PricingPage embedded />
-            </div>
-            {/* <Benefits /> */}
-            <div className="max-w-480 mx-auto px-4">
+            </section>
+            <section id="testimonials" className="max-w-480 mx-auto px-4 scroll-mt-24">
                 <Testimonials />
+            </section>
+            <section id="results" className="scroll-mt-24">
+                <MietResults />
+            </section>
+            <section id="faq" className="scroll-mt-24">
+                <Faq />
+            </section>
+            <section id="contact" className="scroll-mt-24">
+                <CallToAction />
+            </section>
+            <div>
+                <Footer2 />
             </div>
-            <MietResults />
-            <Faq />
-            <CallToAction />
-            <Footer2 />
         </div>
     );
 }
