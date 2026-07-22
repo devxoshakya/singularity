@@ -38,8 +38,8 @@ app.use(
       "https://*.devxoshakya.xyz",
       "http://localhost:3001",
       "http://localhost:4000",
-      "https://*.akshita.dev",
-      "https://*.divyanshgarg.me"
+      "https://s.akshita.dev",
+      "https://s.divyanshgarg.me"
     ],
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
